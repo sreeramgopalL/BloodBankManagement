@@ -20,7 +20,7 @@ services:
     envVars:
       - key: PORT
         value: 9090
-      - key: EUREKA_SERVER_URL
+      - key: EUREKA_SERVER_HOST
         fromService:
           type: web
           name: bloodbank-eureka
@@ -36,7 +36,7 @@ services:
     envVars:
       - key: PORT
         value: 8086
-      - key: EUREKA_SERVER_URL
+      - key: EUREKA_SERVER_HOST
         fromService:
           type: web
           name: bloodbank-eureka
@@ -52,7 +52,7 @@ services:
     envVars:
       - key: PORT
         value: 8084
-      - key: EUREKA_SERVER_URL
+      - key: EUREKA_SERVER_HOST
         fromService:
           type: web
           name: bloodbank-eureka
@@ -68,7 +68,7 @@ services:
     envVars:
       - key: PORT
         value: 8083
-      - key: EUREKA_SERVER_URL
+      - key: EUREKA_SERVER_HOST
         fromService:
           type: web
           name: bloodbank-eureka
@@ -84,7 +84,7 @@ services:
     envVars:
       - key: PORT
         value: 8082
-      - key: EUREKA_SERVER_URL
+      - key: EUREKA_SERVER_HOST
         fromService:
           type: web
           name: bloodbank-eureka
@@ -100,7 +100,7 @@ services:
     envVars:
       - key: PORT
         value: 8085
-      - key: EUREKA_SERVER_URL
+      - key: EUREKA_SERVER_HOST
         fromService:
           type: web
           name: bloodbank-eureka
