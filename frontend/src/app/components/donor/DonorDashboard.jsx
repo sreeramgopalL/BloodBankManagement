@@ -13,13 +13,14 @@ export function DonorDashboard() {
         const fetchDonorData = async () => {
             if (!user?.email) return;
             try {
-                const resProfile = await fetch(`/api/donors/email/${user.email}`);
+                const apiUrl = import.meta.env.VITE_API_URL || '';
+                const resProfile = await fetch(`${apiUrl}/api/donors/email/${user.email}`);
                 if (resProfile.ok) {
                     const profile = await resProfile.json();
                     setDonorInfo(profile);
                     
                     if (profile?.id) {
-                        const resDonations = await fetch(`/api/inventory/donor/${profile.id}`);
+                        const resDonations = await fetch(`${apiUrl}/api/inventory/donor/${profile.id}`);
                         if (resDonations.ok) {
                             const data = await resDonations.json();
                             setDonations(data);
