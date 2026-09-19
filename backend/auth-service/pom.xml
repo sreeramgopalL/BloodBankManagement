@@ -99,6 +99,13 @@
             <scope>runtime</scope>
         </dependency>
 
+        <!-- 💾 H2 in-memory DB fallback for cloud -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
         <!-- 🪶 Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>

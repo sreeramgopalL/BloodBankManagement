@@ -58,6 +58,13 @@
             <scope>runtime</scope>
         </dependency>
 
+        <!-- H2 in-memory DB fallback for cloud -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
         <!-- Actuator (for Eureka health check) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
