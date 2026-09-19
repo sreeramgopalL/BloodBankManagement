@@ -25,6 +25,16 @@ services:
           type: web
           name: bloodbank-eureka
           property: host
+      - key: AUTH_SERVICE_URL
+        value: http://bloodbank-auth:10000
+      - key: DONOR_SERVICE_URL
+        value: http://bloodbank-donor-camp:10000
+      - key: INVENTORY_SERVICE_URL
+        value: http://bloodbank-inventory:10000
+      - key: REQUEST_SERVICE_URL
+        value: http://bloodbank-request-issue:10000
+      - key: NOTIFICATION_SERVICE_URL
+        value: http://bloodbank-notification:10000
 
   # 3. Auth Service
   - type: web
