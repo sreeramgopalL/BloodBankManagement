@@ -4,7 +4,7 @@ services:
     name: bloodbank-eureka
     runtime: docker
     dockerContext: ./backend
-    dockerfilePath: ./eureka-server/Dockerfile
+    dockerfilePath: ./backend/eureka-server/Dockerfile
     plan: free
     envVars:
       - key: PORT
@@ -15,7 +15,7 @@ services:
     name: bloodbank-gateway
     runtime: docker
     dockerContext: ./backend
-    dockerfilePath: ./api-gateway/Dockerfile
+    dockerfilePath: ./backend/api-gateway/Dockerfile
     plan: free
     envVars:
       - key: PORT
@@ -31,7 +31,7 @@ services:
     name: bloodbank-auth
     runtime: docker
     dockerContext: ./backend
-    dockerfilePath: ./auth-service/Dockerfile
+    dockerfilePath: ./backend/auth-service/Dockerfile
     plan: free
     envVars:
       - key: PORT
@@ -47,7 +47,7 @@ services:
     name: bloodbank-donor-camp
     runtime: docker
     dockerContext: ./backend
-    dockerfilePath: ./donor-camp-service/Dockerfile
+    dockerfilePath: ./backend/donor-camp-service/Dockerfile
     plan: free
     envVars:
       - key: PORT
@@ -63,7 +63,7 @@ services:
     name: bloodbank-inventory
     runtime: docker
     dockerContext: ./backend
-    dockerfilePath: ./inventory-service/Dockerfile
+    dockerfilePath: ./backend/inventory-service/Dockerfile
     plan: free
     envVars:
       - key: PORT
@@ -79,7 +79,7 @@ services:
     name: bloodbank-request-issue
     runtime: docker
     dockerContext: ./backend
-    dockerfilePath: ./request-issue-service/Dockerfile
+    dockerfilePath: ./backend/request-issue-service/Dockerfile
     plan: free
     envVars:
       - key: PORT
@@ -95,7 +95,7 @@ services:
     name: bloodbank-notification
     runtime: docker
     dockerContext: ./backend
-    dockerfilePath: ./notification-report-service/Dockerfile
+    dockerfilePath: ./backend/notification-report-service/Dockerfile
     plan: free
     envVars:
       - key: PORT
