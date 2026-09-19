@@ -1,0 +1,147 @@
+version: '3.8'
+
+services:
+  # 🍃 MongoDB Database (used by inventory, request-issue, notification services)
+  mongodb:
+    image: mongo:7.0
+    container_name: bloodbank-mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  # 🗄️ Oracle Database (used by auth-service, donor-camp-service)
+  oracle-db:
+    image: gvenzl/oracle-free:slim-faststart
+    container_name: bloodbank-oracle
+    restart: always
+    environment:
+      ORACLE_PASSWORD: "syspassword"
+      APP_USER: "bloodbank"
+      APP_USER_PASSWORD: "bloodbank123"
+    ports:
+      - "1521:1521"
+    volumes:
+      - oracle_data:/opt/oracle/oradata
+
+  # 🔍 Eureka Service Discovery
+  eureka-server:
+    build:
+      context: ./backend
+      dockerfile: ./eureka-server/Dockerfile
+    container_name: bloodbank-eureka
+    restart: always
+    ports:
+      - "8761:8761"
+    environment:
+      PORT: 8761
+
+  # 🚪 API Gateway
+  api-gateway:
+    build:
+      context: ./backend
+      dockerfile: ./api-gateway/Dockerfile
+    container_name: bloodbank-gateway
+    restart: always
+    depends_on:
+      - eureka-server
+    ports:
+      - "9090:9090"
+    environment:
+      PORT: 9090
+      EUREKA_SERVER_URL: http://eureka-server:8761/eureka/
+
+  # 🔐 Auth Service
+  auth-service:
+    build:
+      context: ./backend
+      dockerfile: ./auth-service/Dockerfile
+    container_name: bloodbank-auth
+    restart: always
+    depends_on:
+      - eureka-server
+      - oracle-db
+    ports:
+      - "8086:8086"
+    environment:
+      PORT: 8086
+      SPRING_DATASOURCE_URL: jdbc:oracle:thin:@oracle-db:1521/FREEPDB1
+      SPRING_DATASOURCE_USERNAME: bloodbank
+      SPRING_DATASOURCE_PASSWORD: bloodbank123
+      EUREKA_SERVER_URL: http://eureka-server:8761/eureka/
+
+  # 🩸 Donor & Camp Service
+  donor-camp-service:
+    build:
+      context: ./backend
+      dockerfile: ./donor-camp-service/Dockerfile
+    container_name: bloodbank-donor-camp
+    restart: always
+    depends_on:
+      - eureka-server
+      - oracle-db
+    ports:
+      - "8084:8084"
+    environment:
+      PORT: 8084
+      SPRING_DATASOURCE_URL: jdbc:oracle:thin:@oracle-db:1521/FREEPDB1
+      SPRING_DATASOURCE_USERNAME: bloodbank
+      SPRING_DATASOURCE_PASSWORD: bloodbank123
+      EUREKA_SERVER_URL: http://eureka-server:8761/eureka/
+
+  # 📦 Inventory Service
+  inventory-service:
+    build:
+      context: ./backend
+      dockerfile: ./inventory-service/Dockerfile
+    container_name: bloodbank-inventory
+    restart: always
+    depends_on:
+      - eureka-server
+      - mongodb
+    ports:
+      - "8083:8083"
+    environment:
+      PORT: 8083
+      SPRING_DATA_MONGODB_URI: mongodb://mongodb:27017/test
+      EUREKA_SERVER_URL: http://eureka-server:8761/eureka/
+
+  # 📋 Request & Issue Service
+  request-issue-service:
+    build:
+      context: ./backend
+      dockerfile: ./request-issue-service/Dockerfile
+    container_name: bloodbank-request-issue
+    restart: always
+    depends_on:
+      - eureka-server
+      - mongodb
+    ports:
+      - "8082:8082"
+    environment:
+      PORT: 8082
+      SPRING_DATA_MONGODB_URI: mongodb://mongodb:27017/bloodbank_request
+      EUREKA_SERVER_URL: http://eureka-server:8761/eureka/
+
+  # 🔔 Notification & Report Service
+  notification-report-service:
+    build:
+      context: ./backend
+      dockerfile: ./notification-report-service/Dockerfile
+    container_name: bloodbank-notification-report
+    restart: always
+    depends_on:
+      - eureka-server
+      - mongodb
+    ports:
+      - "8085:8085"
+    environment:
+      PORT: 8085
+      SPRING_DATA_MONGODB_URI: mongodb://mongodb:27017/bloodbank
+      SPRING_DATA_MONGODB_DATABASE: bloodbank
+      EUREKA_SERVER_URL: http://eureka-server:8761/eureka/
+
+volumes:
+  mongo_data:
+  oracle_data:

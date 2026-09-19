@@ -1,0 +1,33 @@
+# Maven
+**/target/
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+backend/.mvn/timing.properties
+
+# Node / Frontend
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE & OS
+.idea/
+*.iml
+.vscode/
+.settings/
+.project
+.classpath
+.metadata/
+Thumbs.db
+Desktop.ini
+.DS_Store
