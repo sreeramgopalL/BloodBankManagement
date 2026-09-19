@@ -1,0 +1,106 @@
+/* Custom styles to match Figma design overrides */
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+:root {
+    --primary-red: #B91C1C;
+    /* red-700 */
+    --primary-red-hover: #991B1B;
+    /* red-800 */
+    --primary-red-light: #FEE2E2;
+    /* red-100 */
+    --primary-red-label: #FECACA;
+    /* red-200 */
+    --bg-gradient-start: #fff1f2;
+    /* rose-50 */
+    --bg-gradient-end: #ffffff;
+    /* white */
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: #f9fafb;
+    /* gray-50 */
+}
+
+/* Custom Theme Colors */
+.text-purple {
+    color: #613973 !important;
+}
+
+.bg-purple {
+    background-color: #613973 !important;
+}
+
+.bg-purple.bg-opacity-10 {
+    background-color: rgba(97, 57, 115, 0.1) !important;
+}
+
+/* Transitions */
+.transition-all {
+    transition: all 0.2s ease-in-out;
+}
+
+.hover-shadow:hover {
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05) !important;
+    transform: translateY(-5px);
+}
+
+.min-h-screen {
+    min-height: 100vh;
+}
+
+.bg-red-gradient {
+    background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end), var(--bg-gradient-start));
+}
+
+.text-primary-red {
+    color: var(--primary-red) !important;
+}
+
+.bg-primary-red {
+    background-color: var(--primary-red) !important;
+}
+
+.text-primary-red-light {
+    color: var(--primary-red-light) !important;
+}
+
+.text-primary-red-label {
+    color: var(--primary-red-label) !important;
+}
+
+.btn-primary-red {
+    background-color: var(--primary-red);
+    border-color: var(--primary-red);
+    color: white;
+}
+
+.btn-primary-red:hover {
+    background-color: var(--primary-red-hover);
+    border-color: var(--primary-red-hover);
+    color: white;
+}
+
+.shadow-lg-custom {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.rounded-xl-custom {
+    border-radius: 1rem;
+}
+
+.rounded-2xl-custom {
+    border-radius: 1.5rem;
+}
+
+.bg-light-gray {
+    background-color: #f3f4f6 !important;
+}
+
+.hover-bg-gray-200:hover {
+    background-color: #e5e7eb !important;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
